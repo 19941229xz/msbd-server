@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.UserquestionwrongDao">
+	<!-- 动态条件查询userquestionwrong -->
+	<select id="getAllUserquestionwrong" parameterType="Userquestionwrong" resultType="Userquestionwrong">SELECT * FROM userquestionwrong
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">and questionId=#{questionId}</if>  
+			<!-- 错题时间 -->  
+			<if test=" createDate !=null ">and createDate=#{createDate}</if>  
+			<!-- 错题次数 -->  
+			<if test=" wrongCount !=null and wrongCount !='' ">and wrongCount=#{wrongCount}</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">and questionTypeId=#{questionTypeId}</if>  
+			<!-- 试题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Userquestionwrong">SELECT * FROM userquestionwrong 
+		<where></where> 
+	</select>
+	<!-- 动态保存userquestionwrong -->
+	<insert parameterType="Userquestionwrong" id="addUserquestionwrong">INSERT INTO userquestionwrong
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId,</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId,</if>  
+			<!-- 错题时间 -->  
+			<if test=" createDate !=null ">createDate,</if>  
+			<!-- 错题次数 -->  
+			<if test=" wrongCount !=null and wrongCount !='' ">wrongCount,</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId,</if>  
+			<!-- 试题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">#{userId},</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">#{questionId},</if>  
+			<!-- 错题时间 -->  
+			<if test=" createDate !=null ">#{createDate},</if>  
+			<!-- 错题次数 -->  
+			<if test=" wrongCount !=null and wrongCount !='' ">#{wrongCount},</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">#{questionTypeId},</if>  
+			<!-- 试题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新userquestionwrong -->
+	<update id="updateUserquestionwrong" parameterType="Userquestionwrong">update userquestionwrong set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId=#{questionId},</if>  
+			<!-- 错题时间 -->  
+			<if test=" createDate !=null ">createDate=#{createDate},</if>  
+			<!-- 错题次数 -->  
+			<if test=" wrongCount !=null and wrongCount !='' ">wrongCount=#{wrongCount},</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId=#{questionTypeId},</if>  
+			<!-- 试题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

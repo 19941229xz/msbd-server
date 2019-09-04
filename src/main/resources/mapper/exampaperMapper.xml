@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.ExampaperDao">
+	<!-- 动态条件查询exampaper -->
+	<select id="getAllExampaper" parameterType="Exampaper" resultType="Exampaper">SELECT * FROM exampaper
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">and examPaperName=#{examPaperName}</if>  
+			<!-- 出题人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">and createUserId=#{createUserId}</if>  
+			<!-- 命题时间 -->  
+			<if test=" createDate !=null ">and createDate=#{createDate}</if>  
+			<!-- 出题人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">and userHeadPic=#{userHeadPic}</if>  
+			<!-- 出题人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">and userNickName=#{userNickName}</if>  
+			<!-- 出题人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">and userRealName=#{userRealName}</if>  
+			<!-- 试卷所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">and questionJobTypeName=#{questionJobTypeName}</if>  
+			<!-- 考试规定时长（单位秒） -->  
+			<if test=" examTime !=null and examTime !='' ">and examTime=#{examTime}</if>  
+			<!-- 试卷所属班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">and banjiId=#{banjiId}</if>  
+			<!-- 所属班级 -->  
+			<if test=" banjiName !=null and banjiName !='' ">and banjiName=#{banjiName}</if>  
+			<!-- 所属公司id -->  
+			<if test=" companyId !=null and companyId !='' ">and companyId=#{companyId}</if>  
+			<!-- 所属学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">and schoolId=#{schoolId}</if>  
+			<!-- 试卷可浏览级别 1完全公开 2对学校或公司公开 3只对班级公开 -->  
+			<if test=" publicLevel !=null and publicLevel !='' ">and publicLevel=#{publicLevel}</if>  
+			<!-- 试卷是否审核 1 未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">and isChecked=#{isChecked}</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">and checkUserId=#{checkUserId}</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">and checkDate=#{checkDate}</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">and checkUserRealName=#{checkUserRealName}</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">and checkUserNickName=#{checkUserNickName}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Exampaper">SELECT * FROM exampaper 
+		<where> 
+			<!-- 试卷名称 -->  
+			<if test="1==1">or examPaperName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 出题人头像 -->  
+			<if test="1==1">or userHeadPic like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 出题人昵称 -->  
+			<if test="1==1">or userNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 出题人真实姓名 -->  
+			<if test="1==1">or userRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 所属岗位名称 -->  
+			<if test="1==1">or questionJobTypeName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 所属班级 -->  
+			<if test="1==1">or banjiName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test="1==1">or checkUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人昵称 -->  
+			<if test="1==1">or checkUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存exampaper -->
+	<insert parameterType="Exampaper" id="addExampaper">INSERT INTO exampaper
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">examPaperName,</if>  
+			<!-- 出题人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">createUserId,</if>  
+			<!-- 命题时间 -->  
+			<if test=" createDate !=null ">createDate,</if>  
+			<!-- 出题人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">userHeadPic,</if>  
+			<!-- 出题人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">userNickName,</if>  
+			<!-- 出题人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">userRealName,</if>  
+			<!-- 试卷所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName,</if>  
+			<!-- 考试规定时长（单位秒） -->  
+			<if test=" examTime !=null and examTime !='' ">examTime,</if>  
+			<!-- 试卷所属班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId,</if>  
+			<!-- 所属班级 -->  
+			<if test=" banjiName !=null and banjiName !='' ">banjiName,</if>  
+			<!-- 所属公司id -->  
+			<if test=" companyId !=null and companyId !='' ">companyId,</if>  
+			<!-- 所属学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId,</if>  
+			<!-- 试卷可浏览级别 1完全公开 2对学校或公司公开 3只对班级公开 -->  
+			<if test=" publicLevel !=null and publicLevel !='' ">publicLevel,</if>  
+			<!-- 试卷是否审核 1 未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked,</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">checkUserId,</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">checkDate,</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">checkUserRealName,</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">checkUserNickName,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">#{examPaperName},</if>  
+			<!-- 出题人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">#{createUserId},</if>  
+			<!-- 命题时间 -->  
+			<if test=" createDate !=null ">#{createDate},</if>  
+			<!-- 出题人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">#{userHeadPic},</if>  
+			<!-- 出题人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">#{userNickName},</if>  
+			<!-- 出题人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">#{userRealName},</if>  
+			<!-- 试卷所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">#{questionJobTypeName},</if>  
+			<!-- 考试规定时长（单位秒） -->  
+			<if test=" examTime !=null and examTime !='' ">#{examTime},</if>  
+			<!-- 试卷所属班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">#{banjiId},</if>  
+			<!-- 所属班级 -->  
+			<if test=" banjiName !=null and banjiName !='' ">#{banjiName},</if>  
+			<!-- 所属公司id -->  
+			<if test=" companyId !=null and companyId !='' ">#{companyId},</if>  
+			<!-- 所属学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">#{schoolId},</if>  
+			<!-- 试卷可浏览级别 1完全公开 2对学校或公司公开 3只对班级公开 -->  
+			<if test=" publicLevel !=null and publicLevel !='' ">#{publicLevel},</if>  
+			<!-- 试卷是否审核 1 未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">#{isChecked},</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">#{checkUserId},</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">#{checkDate},</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">#{checkUserRealName},</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">#{checkUserNickName},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新exampaper -->
+	<update id="updateExampaper" parameterType="Exampaper">update exampaper set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">examPaperName=#{examPaperName},</if>  
+			<!-- 出题人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">createUserId=#{createUserId},</if>  
+			<!-- 命题时间 -->  
+			<if test=" createDate !=null ">createDate=#{createDate},</if>  
+			<!-- 出题人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">userHeadPic=#{userHeadPic},</if>  
+			<!-- 出题人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">userNickName=#{userNickName},</if>  
+			<!-- 出题人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">userRealName=#{userRealName},</if>  
+			<!-- 试卷所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName=#{questionJobTypeName},</if>  
+			<!-- 考试规定时长（单位秒） -->  
+			<if test=" examTime !=null and examTime !='' ">examTime=#{examTime},</if>  
+			<!-- 试卷所属班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId=#{banjiId},</if>  
+			<!-- 所属班级 -->  
+			<if test=" banjiName !=null and banjiName !='' ">banjiName=#{banjiName},</if>  
+			<!-- 所属公司id -->  
+			<if test=" companyId !=null and companyId !='' ">companyId=#{companyId},</if>  
+			<!-- 所属学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId=#{schoolId},</if>  
+			<!-- 试卷可浏览级别 1完全公开 2对学校或公司公开 3只对班级公开 -->  
+			<if test=" publicLevel !=null and publicLevel !='' ">publicLevel=#{publicLevel},</if>  
+			<!-- 试卷是否审核 1 未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked=#{isChecked},</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">checkUserId=#{checkUserId},</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">checkDate=#{checkDate},</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">checkUserRealName=#{checkUserRealName},</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">checkUserNickName=#{checkUserNickName},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

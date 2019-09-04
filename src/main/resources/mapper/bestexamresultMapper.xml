@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.BestexamresultDao">
+	<!-- 动态条件查询bestexamresult -->
+	<select id="getAllBestexamresult" parameterType="Bestexamresult" resultType="Bestexamresult">SELECT * FROM bestexamresult
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 考试用户id -->  
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>  
+			<!-- 用户昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">and userNickName=#{userNickName}</if>  
+			<!-- 用户真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">and userRealName=#{userRealName}</if>  
+			<!-- 账号 -->  
+			<if test=" userName !=null and userName !='' ">and userName=#{userName}</if>  
+			<!-- 用户头像 -->  
+			<if test=" userHeadImg !=null and userHeadImg !='' ">and userHeadImg=#{userHeadImg}</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if>  
+			<!-- 考试分数 -->  
+			<if test=" score !=null and score !='' ">and score=#{score}</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">and banjiId=#{banjiId}</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">and banjiName=#{banjiName}</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">and companyId=#{companyId}</if>  
+			<!-- 公司名称 -->  
+			<if test=" companyName !=null and companyName !='' ">and companyName=#{companyName}</if>  
+			<!-- 试题总数 -->  
+			<if test=" totalQuestionCount !=null and totalQuestionCount !='' ">and totalQuestionCount=#{totalQuestionCount}</if>  
+			<!-- 答错题目数 -->  
+			<if test=" wrongAnswerCount !=null and wrongAnswerCount !='' ">and wrongAnswerCount=#{wrongAnswerCount}</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">and schoolId=#{schoolId}</if>  
+			<!-- 学校名称 -->  
+			<if test=" schoolName !=null and schoolName !='' ">and schoolName=#{schoolName}</if>  
+			<!-- 考试是否完成 1未完成 2已完成 -->  
+			<if test=" isFinished !=null and isFinished !='' ">and isFinished=#{isFinished}</if>  
+			<!-- 完成时长 -->  
+			<if test=" finishTimeLong !=null and finishTimeLong !='' ">and finishTimeLong=#{finishTimeLong}</if>  
+			<!-- 完成时间 -->  
+			<if test=" finishiDate !=null ">and finishiDate=#{finishiDate}</if>  
+			<!-- 是否最高分 1不是 2是 -->  
+			<if test=" isBest !=null and isBest !='' ">and isBest=#{isBest}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Bestexamresult">SELECT * FROM bestexamresult 
+		<where> 
+			<!-- 用户昵称 -->  
+			<if test="1==1">or userNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 用户真实姓名 -->  
+			<if test="1==1">or userRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 账号 -->  
+			<if test="1==1">or userName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 用户头像 -->  
+			<if test="1==1">or userHeadImg like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 班级名称 -->  
+			<if test="1==1">or banjiName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 公司名称 -->  
+			<if test="1==1">or companyName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 学校名称 -->  
+			<if test="1==1">or schoolName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存bestexamresult -->
+	<insert parameterType="Bestexamresult" id="addBestexamresult">INSERT INTO bestexamresult
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 考试用户id -->  
+			<if test=" userId !=null and userId !='' ">userId,</if>  
+			<!-- 用户昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">userNickName,</if>  
+			<!-- 用户真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">userRealName,</if>  
+			<!-- 账号 -->  
+			<if test=" userName !=null and userName !='' ">userName,</if>  
+			<!-- 用户头像 -->  
+			<if test=" userHeadImg !=null and userHeadImg !='' ">userHeadImg,</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if>  
+			<!-- 考试分数 -->  
+			<if test=" score !=null and score !='' ">score,</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId,</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">banjiName,</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">companyId,</if>  
+			<!-- 公司名称 -->  
+			<if test=" companyName !=null and companyName !='' ">companyName,</if>  
+			<!-- 试题总数 -->  
+			<if test=" totalQuestionCount !=null and totalQuestionCount !='' ">totalQuestionCount,</if>  
+			<!-- 答错题目数 -->  
+			<if test=" wrongAnswerCount !=null and wrongAnswerCount !='' ">wrongAnswerCount,</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId,</if>  
+			<!-- 学校名称 -->  
+			<if test=" schoolName !=null and schoolName !='' ">schoolName,</if>  
+			<!-- 考试是否完成 1未完成 2已完成 -->  
+			<if test=" isFinished !=null and isFinished !='' ">isFinished,</if>  
+			<!-- 完成时长 -->  
+			<if test=" finishTimeLong !=null and finishTimeLong !='' ">finishTimeLong,</if>  
+			<!-- 完成时间 -->  
+			<if test=" finishiDate !=null ">finishiDate,</if>  
+			<!-- 是否最高分 1不是 2是 -->  
+			<if test=" isBest !=null and isBest !='' ">isBest,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 考试用户id -->  
+			<if test=" userId !=null and userId !='' ">#{userId},</if>  
+			<!-- 用户昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">#{userNickName},</if>  
+			<!-- 用户真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">#{userRealName},</if>  
+			<!-- 账号 -->  
+			<if test=" userName !=null and userName !='' ">#{userName},</if>  
+			<!-- 用户头像 -->  
+			<if test=" userHeadImg !=null and userHeadImg !='' ">#{userHeadImg},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if>  
+			<!-- 考试分数 -->  
+			<if test=" score !=null and score !='' ">#{score},</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">#{banjiId},</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">#{banjiName},</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">#{companyId},</if>  
+			<!-- 公司名称 -->  
+			<if test=" companyName !=null and companyName !='' ">#{companyName},</if>  
+			<!-- 试题总数 -->  
+			<if test=" totalQuestionCount !=null and totalQuestionCount !='' ">#{totalQuestionCount},</if>  
+			<!-- 答错题目数 -->  
+			<if test=" wrongAnswerCount !=null and wrongAnswerCount !='' ">#{wrongAnswerCount},</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">#{schoolId},</if>  
+			<!-- 学校名称 -->  
+			<if test=" schoolName !=null and schoolName !='' ">#{schoolName},</if>  
+			<!-- 考试是否完成 1未完成 2已完成 -->  
+			<if test=" isFinished !=null and isFinished !='' ">#{isFinished},</if>  
+			<!-- 完成时长 -->  
+			<if test=" finishTimeLong !=null and finishTimeLong !='' ">#{finishTimeLong},</if>  
+			<!-- 完成时间 -->  
+			<if test=" finishiDate !=null ">#{finishiDate},</if>  
+			<!-- 是否最高分 1不是 2是 -->  
+			<if test=" isBest !=null and isBest !='' ">#{isBest},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新bestexamresult -->
+	<update id="updateBestexamresult" parameterType="Bestexamresult">update bestexamresult set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 考试用户id -->  
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>  
+			<!-- 用户昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">userNickName=#{userNickName},</if>  
+			<!-- 用户真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">userRealName=#{userRealName},</if>  
+			<!-- 账号 -->  
+			<if test=" userName !=null and userName !='' ">userName=#{userName},</if>  
+			<!-- 用户头像 -->  
+			<if test=" userHeadImg !=null and userHeadImg !='' ">userHeadImg=#{userHeadImg},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if>  
+			<!-- 考试分数 -->  
+			<if test=" score !=null and score !='' ">score=#{score},</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId=#{banjiId},</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">banjiName=#{banjiName},</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">companyId=#{companyId},</if>  
+			<!-- 公司名称 -->  
+			<if test=" companyName !=null and companyName !='' ">companyName=#{companyName},</if>  
+			<!-- 试题总数 -->  
+			<if test=" totalQuestionCount !=null and totalQuestionCount !='' ">totalQuestionCount=#{totalQuestionCount},</if>  
+			<!-- 答错题目数 -->  
+			<if test=" wrongAnswerCount !=null and wrongAnswerCount !='' ">wrongAnswerCount=#{wrongAnswerCount},</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId=#{schoolId},</if>  
+			<!-- 学校名称 -->  
+			<if test=" schoolName !=null and schoolName !='' ">schoolName=#{schoolName},</if>  
+			<!-- 考试是否完成 1未完成 2已完成 -->  
+			<if test=" isFinished !=null and isFinished !='' ">isFinished=#{isFinished},</if>  
+			<!-- 完成时长 -->  
+			<if test=" finishTimeLong !=null and finishTimeLong !='' ">finishTimeLong=#{finishTimeLong},</if>  
+			<!-- 完成时间 -->  
+			<if test=" finishiDate !=null ">finishiDate=#{finishiDate},</if>  
+			<!-- 是否最高分 1不是 2是 -->  
+			<if test=" isBest !=null and isBest !='' ">isBest=#{isBest},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

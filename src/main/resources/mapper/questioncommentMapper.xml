@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.QuestioncommentDao">
+	<!-- 动态条件查询questioncomment -->
+	<select id="getAllQuestioncomment" parameterType="Questioncomment" resultType="Questioncomment">SELECT * FROM questioncomment
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 评论内容 -->  
+			<if test=" commentContent !=null and commentContent !='' ">and commentContent=#{commentContent}</if>  
+			<!-- 评论用户id -->  
+			<if test=" commentUserId !=null and commentUserId !='' ">and commentUserId=#{commentUserId}</if>  
+			<!-- 评论时间 -->  
+			<if test=" commentDate !=null ">and commentDate=#{commentDate}</if>  
+			<!-- 评论用户头像 -->  
+			<if test=" commentUserHeadPic !=null and commentUserHeadPic !='' ">and commentUserHeadPic=#{commentUserHeadPic}</if>  
+			<!-- 评论用户昵称 -->  
+			<if test=" commentUserNickName !=null and commentUserNickName !='' ">and commentUserNickName=#{commentUserNickName}</if>  
+			<!-- 评论用户真实姓名 -->  
+			<if test=" commentUserRealName !=null and commentUserRealName !='' ">and commentUserRealName=#{commentUserRealName}</if>  
+			<!-- 评论用户性别 1男 2女 -->  
+			<if test=" commentUserGender !=null and commentUserGender !='' ">and commentUserGender=#{commentUserGender}</if>  
+			<!-- 点赞数 -->  
+			<if test=" favorNum !=null and favorNum !='' ">and favorNum=#{favorNum}</if>  
+			<!-- 评论所属问题id -->  
+			<if test=" questionId !=null and questionId !='' ">and questionId=#{questionId}</if>  
+			<!-- 评论所属问题 -->  
+			<if test=" questionName !=null and questionName !='' ">and questionName=#{questionName}</if>  
+			<!-- 该题的创建者id -->  
+			<if test=" questionCreateUserId !=null and questionCreateUserId !='' ">and questionCreateUserId=#{questionCreateUserId}</if>  
+			<!-- 该题创建者真实姓名 -->  
+			<if test=" questionCreateUserRealName !=null and questionCreateUserRealName !='' ">and questionCreateUserRealName=#{questionCreateUserRealName}</if>  
+			<!-- 该题创建者昵称 -->  
+			<if test=" questionCreateUserNickName !=null and questionCreateUserNickName !='' ">and questionCreateUserNickName=#{questionCreateUserNickName}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Questioncomment">SELECT * FROM questioncomment 
+		<where> 
+			<!-- 评论内容 -->  
+			<if test="1==1">or commentContent like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论用户头像 -->  
+			<if test="1==1">or commentUserHeadPic like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论用户昵称 -->  
+			<if test="1==1">or commentUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论用户真实姓名 -->  
+			<if test="1==1">or commentUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论所属问题 -->  
+			<if test="1==1">or questionName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 该题创建者真实姓名 -->  
+			<if test="1==1">or questionCreateUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 该题创建者昵称 -->  
+			<if test="1==1">or questionCreateUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存questioncomment -->
+	<insert parameterType="Questioncomment" id="addQuestioncomment">INSERT INTO questioncomment
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 评论内容 -->  
+			<if test=" commentContent !=null and commentContent !='' ">commentContent,</if>  
+			<!-- 评论用户id -->  
+			<if test=" commentUserId !=null and commentUserId !='' ">commentUserId,</if>  
+			<!-- 评论时间 -->  
+			<if test=" commentDate !=null ">commentDate,</if>  
+			<!-- 评论用户头像 -->  
+			<if test=" commentUserHeadPic !=null and commentUserHeadPic !='' ">commentUserHeadPic,</if>  
+			<!-- 评论用户昵称 -->  
+			<if test=" commentUserNickName !=null and commentUserNickName !='' ">commentUserNickName,</if>  
+			<!-- 评论用户真实姓名 -->  
+			<if test=" commentUserRealName !=null and commentUserRealName !='' ">commentUserRealName,</if>  
+			<!-- 评论用户性别 1男 2女 -->  
+			<if test=" commentUserGender !=null and commentUserGender !='' ">commentUserGender,</if>  
+			<!-- 点赞数 -->  
+			<if test=" favorNum !=null and favorNum !='' ">favorNum,</if>  
+			<!-- 评论所属问题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId,</if>  
+			<!-- 评论所属问题 -->  
+			<if test=" questionName !=null and questionName !='' ">questionName,</if>  
+			<!-- 该题的创建者id -->  
+			<if test=" questionCreateUserId !=null and questionCreateUserId !='' ">questionCreateUserId,</if>  
+			<!-- 该题创建者真实姓名 -->  
+			<if test=" questionCreateUserRealName !=null and questionCreateUserRealName !='' ">questionCreateUserRealName,</if>  
+			<!-- 该题创建者昵称 -->  
+			<if test=" questionCreateUserNickName !=null and questionCreateUserNickName !='' ">questionCreateUserNickName,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 评论内容 -->  
+			<if test=" commentContent !=null and commentContent !='' ">#{commentContent},</if>  
+			<!-- 评论用户id -->  
+			<if test=" commentUserId !=null and commentUserId !='' ">#{commentUserId},</if>  
+			<!-- 评论时间 -->  
+			<if test=" commentDate !=null ">#{commentDate},</if>  
+			<!-- 评论用户头像 -->  
+			<if test=" commentUserHeadPic !=null and commentUserHeadPic !='' ">#{commentUserHeadPic},</if>  
+			<!-- 评论用户昵称 -->  
+			<if test=" commentUserNickName !=null and commentUserNickName !='' ">#{commentUserNickName},</if>  
+			<!-- 评论用户真实姓名 -->  
+			<if test=" commentUserRealName !=null and commentUserRealName !='' ">#{commentUserRealName},</if>  
+			<!-- 评论用户性别 1男 2女 -->  
+			<if test=" commentUserGender !=null and commentUserGender !='' ">#{commentUserGender},</if>  
+			<!-- 点赞数 -->  
+			<if test=" favorNum !=null and favorNum !='' ">#{favorNum},</if>  
+			<!-- 评论所属问题id -->  
+			<if test=" questionId !=null and questionId !='' ">#{questionId},</if>  
+			<!-- 评论所属问题 -->  
+			<if test=" questionName !=null and questionName !='' ">#{questionName},</if>  
+			<!-- 该题的创建者id -->  
+			<if test=" questionCreateUserId !=null and questionCreateUserId !='' ">#{questionCreateUserId},</if>  
+			<!-- 该题创建者真实姓名 -->  
+			<if test=" questionCreateUserRealName !=null and questionCreateUserRealName !='' ">#{questionCreateUserRealName},</if>  
+			<!-- 该题创建者昵称 -->  
+			<if test=" questionCreateUserNickName !=null and questionCreateUserNickName !='' ">#{questionCreateUserNickName},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新questioncomment -->
+	<update id="updateQuestioncomment" parameterType="Questioncomment">update questioncomment set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 评论内容 -->  
+			<if test=" commentContent !=null and commentContent !='' ">commentContent=#{commentContent},</if>  
+			<!-- 评论用户id -->  
+			<if test=" commentUserId !=null and commentUserId !='' ">commentUserId=#{commentUserId},</if>  
+			<!-- 评论时间 -->  
+			<if test=" commentDate !=null ">commentDate=#{commentDate},</if>  
+			<!-- 评论用户头像 -->  
+			<if test=" commentUserHeadPic !=null and commentUserHeadPic !='' ">commentUserHeadPic=#{commentUserHeadPic},</if>  
+			<!-- 评论用户昵称 -->  
+			<if test=" commentUserNickName !=null and commentUserNickName !='' ">commentUserNickName=#{commentUserNickName},</if>  
+			<!-- 评论用户真实姓名 -->  
+			<if test=" commentUserRealName !=null and commentUserRealName !='' ">commentUserRealName=#{commentUserRealName},</if>  
+			<!-- 评论用户性别 1男 2女 -->  
+			<if test=" commentUserGender !=null and commentUserGender !='' ">commentUserGender=#{commentUserGender},</if>  
+			<!-- 点赞数 -->  
+			<if test=" favorNum !=null and favorNum !='' ">favorNum=#{favorNum},</if>  
+			<!-- 评论所属问题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId=#{questionId},</if>  
+			<!-- 评论所属问题 -->  
+			<if test=" questionName !=null and questionName !='' ">questionName=#{questionName},</if>  
+			<!-- 该题的创建者id -->  
+			<if test=" questionCreateUserId !=null and questionCreateUserId !='' ">questionCreateUserId=#{questionCreateUserId},</if>  
+			<!-- 该题创建者真实姓名 -->  
+			<if test=" questionCreateUserRealName !=null and questionCreateUserRealName !='' ">questionCreateUserRealName=#{questionCreateUserRealName},</if>  
+			<!-- 该题创建者昵称 -->  
+			<if test=" questionCreateUserNickName !=null and questionCreateUserNickName !='' ">questionCreateUserNickName=#{questionCreateUserNickName},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

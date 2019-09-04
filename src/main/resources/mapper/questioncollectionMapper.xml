@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.QuestioncollectionDao">
+	<!-- 动态条件查询questioncollection -->
+	<select id="getAllQuestioncollection" parameterType="Questioncollection" resultType="Questioncollection">SELECT * FROM questioncollection
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 收藏人id -->  
+			<if test=" collectUserId !=null and collectUserId !='' ">and collectUserId=#{collectUserId}</if>  
+			<!-- 被收藏的试题id -->  
+			<if test=" questionId !=null and questionId !='' ">and questionId=#{questionId}</if>  
+			<!-- 收藏时间 -->  
+			<if test=" collectDate !=null ">and collectDate=#{collectDate}</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">and questionTypeId=#{questionTypeId}</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Questioncollection">SELECT * FROM questioncollection 
+		<where></where> 
+	</select>
+	<!-- 动态保存questioncollection -->
+	<insert parameterType="Questioncollection" id="addQuestioncollection">INSERT INTO questioncollection
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 收藏人id -->  
+			<if test=" collectUserId !=null and collectUserId !='' ">collectUserId,</if>  
+			<!-- 被收藏的试题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId,</if>  
+			<!-- 收藏时间 -->  
+			<if test=" collectDate !=null ">collectDate,</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId,</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 收藏人id -->  
+			<if test=" collectUserId !=null and collectUserId !='' ">#{collectUserId},</if>  
+			<!-- 被收藏的试题id -->  
+			<if test=" questionId !=null and questionId !='' ">#{questionId},</if>  
+			<!-- 收藏时间 -->  
+			<if test=" collectDate !=null ">#{collectDate},</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">#{questionTypeId},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新questioncollection -->
+	<update id="updateQuestioncollection" parameterType="Questioncollection">update questioncollection set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 收藏人id -->  
+			<if test=" collectUserId !=null and collectUserId !='' ">collectUserId=#{collectUserId},</if>  
+			<!-- 被收藏的试题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId=#{questionId},</if>  
+			<!-- 收藏时间 -->  
+			<if test=" collectDate !=null ">collectDate=#{collectDate},</if>  
+			<!-- 试题类型  1选择题 2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId=#{questionTypeId},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

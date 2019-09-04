@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.CourseDao">
+	<!-- 动态条件查询course -->
+	<select id="getAllCourse" parameterType="Course" resultType="Course">SELECT * FROM course
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 课程名称 -->  
+			<if test=" courseName !=null and courseName !='' ">and courseName=#{courseName}</if>  
+			<!-- 课程介绍图片1 -->  
+			<if test=" coursePic1 !=null and coursePic1 !='' ">and coursePic1=#{coursePic1}</if>  
+			<!-- 课程介绍图片2 -->  
+			<if test=" coursePic2 !=null and coursePic2 !='' ">and coursePic2=#{coursePic2}</if>  
+			<!-- 课程介绍图片3 -->  
+			<if test=" coursePic3 !=null and coursePic3 !='' ">and coursePic3=#{coursePic3}</if>  
+			<!-- 课程介绍图片4 -->  
+			<if test=" coursePic4 !=null and coursePic4 !='' ">and coursePic4=#{coursePic4}</if>  
+			<!-- 所需积分 -->  
+			<if test=" pointsNeed !=null and pointsNeed !='' ">and pointsNeed=#{pointsNeed}</if>  
+			<!-- 创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">and createUserId=#{createUserId}</if>  
+			<!-- 创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">and createUserRealName=#{createUserRealName}</if>  
+			<!-- 创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">and createUserNickName=#{createUserNickName}</if>  
+			<!-- 审核人账号 -->  
+			<if test=" createUserName !=null and createUserName !='' ">and createUserName=#{createUserName}</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">and createDate=#{createDate}</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">and checkUserId=#{checkUserId}</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">and checkUserRealName=#{checkUserRealName}</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">and checkUserNickName=#{checkUserNickName}</if>  
+			<!-- 审核人账号 -->  
+			<if test=" checkUserName !=null and checkUserName !='' ">and checkUserName=#{checkUserName}</if>  
+			<!-- 是否审核  1未审核 2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">and isChecked=#{isChecked}</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">and checkDate=#{checkDate}</if>  
+			<!-- 网盘下载链接 -->  
+			<if test=" downloadUrl !=null and downloadUrl !='' ">and downloadUrl=#{downloadUrl}</if>  
+			<!-- 网盘下载密码 -->  
+			<if test=" downloadPwd !=null and downloadPwd !='' ">and downloadPwd=#{downloadPwd}</if>  
+			<!-- 课程二维码 -->  
+			<if test=" courseQrcode !=null and courseQrcode !='' ">and courseQrcode=#{courseQrcode}</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">and viewNum=#{viewNum}</if>  
+			<!-- 购买次数 -->  
+			<if test=" buyNum !=null and buyNum !='' ">and buyNum=#{buyNum}</if>  
+			<!-- 长按识别次数 -->  
+			<if test=" longTabNum !=null and longTabNum !='' ">and longTabNum=#{longTabNum}</if>  
+			<!-- 备注 -->  
+			<if test=" remark !=null and remark !='' ">and remark=#{remark}</if>  
+			<!-- 课程所属岗位id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if>  
+			<!-- 课程所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">and questionJobTypeName=#{questionJobTypeName}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Course">SELECT * FROM course 
+		<where> 
+			<!-- 课程名称 -->  
+			<if test="1==1">or courseName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 课程介绍图片1 -->  
+			<if test="1==1">or coursePic1 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 课程介绍图片2 -->  
+			<if test="1==1">or coursePic2 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 课程介绍图片3 -->  
+			<if test="1==1">or coursePic3 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 课程介绍图片4 -->  
+			<if test="1==1">or coursePic4 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 所需积分 -->  
+			<if test="1==1">or pointsNeed like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 创建人真实姓名 -->  
+			<if test="1==1">or createUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 创建人昵称 -->  
+			<if test="1==1">or createUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人账号 -->  
+			<if test="1==1">or createUserName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test="1==1">or checkUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人昵称 -->  
+			<if test="1==1">or checkUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人账号 -->  
+			<if test="1==1">or checkUserName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 网盘下载链接 -->  
+			<if test="1==1">or downloadUrl like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 网盘下载密码 -->  
+			<if test="1==1">or downloadPwd like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 课程二维码 -->  
+			<if test="1==1">or courseQrcode like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 备注 -->  
+			<if test="1==1">or remark like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 课程所属岗位名称 -->  
+			<if test="1==1">or questionJobTypeName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存course -->
+	<insert parameterType="Course" id="addCourse">INSERT INTO course
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 课程名称 -->  
+			<if test=" courseName !=null and courseName !='' ">courseName,</if>  
+			<!-- 课程介绍图片1 -->  
+			<if test=" coursePic1 !=null and coursePic1 !='' ">coursePic1,</if>  
+			<!-- 课程介绍图片2 -->  
+			<if test=" coursePic2 !=null and coursePic2 !='' ">coursePic2,</if>  
+			<!-- 课程介绍图片3 -->  
+			<if test=" coursePic3 !=null and coursePic3 !='' ">coursePic3,</if>  
+			<!-- 课程介绍图片4 -->  
+			<if test=" coursePic4 !=null and coursePic4 !='' ">coursePic4,</if>  
+			<!-- 所需积分 -->  
+			<if test=" pointsNeed !=null and pointsNeed !='' ">pointsNeed,</if>  
+			<!-- 创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">createUserId,</if>  
+			<!-- 创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">createUserRealName,</if>  
+			<!-- 创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">createUserNickName,</if>  
+			<!-- 审核人账号 -->  
+			<if test=" createUserName !=null and createUserName !='' ">createUserName,</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">createDate,</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">checkUserId,</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">checkUserRealName,</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">checkUserNickName,</if>  
+			<!-- 审核人账号 -->  
+			<if test=" checkUserName !=null and checkUserName !='' ">checkUserName,</if>  
+			<!-- 是否审核  1未审核 2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked,</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">checkDate,</if>  
+			<!-- 网盘下载链接 -->  
+			<if test=" downloadUrl !=null and downloadUrl !='' ">downloadUrl,</if>  
+			<!-- 网盘下载密码 -->  
+			<if test=" downloadPwd !=null and downloadPwd !='' ">downloadPwd,</if>  
+			<!-- 课程二维码 -->  
+			<if test=" courseQrcode !=null and courseQrcode !='' ">courseQrcode,</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">viewNum,</if>  
+			<!-- 购买次数 -->  
+			<if test=" buyNum !=null and buyNum !='' ">buyNum,</if>  
+			<!-- 长按识别次数 -->  
+			<if test=" longTabNum !=null and longTabNum !='' ">longTabNum,</if>  
+			<!-- 备注 -->  
+			<if test=" remark !=null and remark !='' ">remark,</if>  
+			<!-- 课程所属岗位id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if>  
+			<!-- 课程所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 课程名称 -->  
+			<if test=" courseName !=null and courseName !='' ">#{courseName},</if>  
+			<!-- 课程介绍图片1 -->  
+			<if test=" coursePic1 !=null and coursePic1 !='' ">#{coursePic1},</if>  
+			<!-- 课程介绍图片2 -->  
+			<if test=" coursePic2 !=null and coursePic2 !='' ">#{coursePic2},</if>  
+			<!-- 课程介绍图片3 -->  
+			<if test=" coursePic3 !=null and coursePic3 !='' ">#{coursePic3},</if>  
+			<!-- 课程介绍图片4 -->  
+			<if test=" coursePic4 !=null and coursePic4 !='' ">#{coursePic4},</if>  
+			<!-- 所需积分 -->  
+			<if test=" pointsNeed !=null and pointsNeed !='' ">#{pointsNeed},</if>  
+			<!-- 创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">#{createUserId},</if>  
+			<!-- 创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">#{createUserRealName},</if>  
+			<!-- 创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">#{createUserNickName},</if>  
+			<!-- 审核人账号 -->  
+			<if test=" createUserName !=null and createUserName !='' ">#{createUserName},</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">#{createDate},</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">#{checkUserId},</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">#{checkUserRealName},</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">#{checkUserNickName},</if>  
+			<!-- 审核人账号 -->  
+			<if test=" checkUserName !=null and checkUserName !='' ">#{checkUserName},</if>  
+			<!-- 是否审核  1未审核 2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">#{isChecked},</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">#{checkDate},</if>  
+			<!-- 网盘下载链接 -->  
+			<if test=" downloadUrl !=null and downloadUrl !='' ">#{downloadUrl},</if>  
+			<!-- 网盘下载密码 -->  
+			<if test=" downloadPwd !=null and downloadPwd !='' ">#{downloadPwd},</if>  
+			<!-- 课程二维码 -->  
+			<if test=" courseQrcode !=null and courseQrcode !='' ">#{courseQrcode},</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">#{viewNum},</if>  
+			<!-- 购买次数 -->  
+			<if test=" buyNum !=null and buyNum !='' ">#{buyNum},</if>  
+			<!-- 长按识别次数 -->  
+			<if test=" longTabNum !=null and longTabNum !='' ">#{longTabNum},</if>  
+			<!-- 备注 -->  
+			<if test=" remark !=null and remark !='' ">#{remark},</if>  
+			<!-- 课程所属岗位id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if>  
+			<!-- 课程所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">#{questionJobTypeName},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新course -->
+	<update id="updateCourse" parameterType="Course">update course set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 课程名称 -->  
+			<if test=" courseName !=null and courseName !='' ">courseName=#{courseName},</if>  
+			<!-- 课程介绍图片1 -->  
+			<if test=" coursePic1 !=null and coursePic1 !='' ">coursePic1=#{coursePic1},</if>  
+			<!-- 课程介绍图片2 -->  
+			<if test=" coursePic2 !=null and coursePic2 !='' ">coursePic2=#{coursePic2},</if>  
+			<!-- 课程介绍图片3 -->  
+			<if test=" coursePic3 !=null and coursePic3 !='' ">coursePic3=#{coursePic3},</if>  
+			<!-- 课程介绍图片4 -->  
+			<if test=" coursePic4 !=null and coursePic4 !='' ">coursePic4=#{coursePic4},</if>  
+			<!-- 所需积分 -->  
+			<if test=" pointsNeed !=null and pointsNeed !='' ">pointsNeed=#{pointsNeed},</if>  
+			<!-- 创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">createUserId=#{createUserId},</if>  
+			<!-- 创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">createUserRealName=#{createUserRealName},</if>  
+			<!-- 创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">createUserNickName=#{createUserNickName},</if>  
+			<!-- 审核人账号 -->  
+			<if test=" createUserName !=null and createUserName !='' ">createUserName=#{createUserName},</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">createDate=#{createDate},</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">checkUserId=#{checkUserId},</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">checkUserRealName=#{checkUserRealName},</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">checkUserNickName=#{checkUserNickName},</if>  
+			<!-- 审核人账号 -->  
+			<if test=" checkUserName !=null and checkUserName !='' ">checkUserName=#{checkUserName},</if>  
+			<!-- 是否审核  1未审核 2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked=#{isChecked},</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">checkDate=#{checkDate},</if>  
+			<!-- 网盘下载链接 -->  
+			<if test=" downloadUrl !=null and downloadUrl !='' ">downloadUrl=#{downloadUrl},</if>  
+			<!-- 网盘下载密码 -->  
+			<if test=" downloadPwd !=null and downloadPwd !='' ">downloadPwd=#{downloadPwd},</if>  
+			<!-- 课程二维码 -->  
+			<if test=" courseQrcode !=null and courseQrcode !='' ">courseQrcode=#{courseQrcode},</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">viewNum=#{viewNum},</if>  
+			<!-- 购买次数 -->  
+			<if test=" buyNum !=null and buyNum !='' ">buyNum=#{buyNum},</if>  
+			<!-- 长按识别次数 -->  
+			<if test=" longTabNum !=null and longTabNum !='' ">longTabNum=#{longTabNum},</if>  
+			<!-- 备注 -->  
+			<if test=" remark !=null and remark !='' ">remark=#{remark},</if>  
+			<!-- 课程所属岗位id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if>  
+			<!-- 课程所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName=#{questionJobTypeName},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.UseranserquestionDao">
+	<!-- 动态条件查询useranserquestion -->
+	<select id="getAllUseranserquestion" parameterType="Useranserquestion" resultType="Useranserquestion">SELECT * FROM useranserquestion
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">and questionId=#{questionId}</if>  
+			<!-- 试题类型  1选择题（单选） 2判断题 3多选题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">and questionTypeId=#{questionTypeId}</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if>  
+			<!-- 答题人id -->  
+			<if test=" answerUserId !=null and answerUserId !='' ">and answerUserId=#{answerUserId}</if>  
+			<!-- 答题时间 -->  
+			<if test=" answerDate !=null ">and answerDate=#{answerDate}</if>  
+			<!-- 是否回答正确  1 正确  2错误 -->  
+			<if test=" answerIsRight !=null and answerIsRight !='' ">and answerIsRight=#{answerIsRight}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Useranserquestion">SELECT * FROM useranserquestion 
+		<where></where> 
+	</select>
+	<!-- 动态保存useranserquestion -->
+	<insert parameterType="Useranserquestion" id="addUseranserquestion">INSERT INTO useranserquestion
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId,</if>  
+			<!-- 试题类型  1选择题（单选） 2判断题 3多选题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId,</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if>  
+			<!-- 答题人id -->  
+			<if test=" answerUserId !=null and answerUserId !='' ">answerUserId,</if>  
+			<!-- 答题时间 -->  
+			<if test=" answerDate !=null ">answerDate,</if>  
+			<!-- 是否回答正确  1 正确  2错误 -->  
+			<if test=" answerIsRight !=null and answerIsRight !='' ">answerIsRight,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">#{questionId},</if>  
+			<!-- 试题类型  1选择题（单选） 2判断题 3多选题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">#{questionTypeId},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if>  
+			<!-- 答题人id -->  
+			<if test=" answerUserId !=null and answerUserId !='' ">#{answerUserId},</if>  
+			<!-- 答题时间 -->  
+			<if test=" answerDate !=null ">#{answerDate},</if>  
+			<!-- 是否回答正确  1 正确  2错误 -->  
+			<if test=" answerIsRight !=null and answerIsRight !='' ">#{answerIsRight},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新useranserquestion -->
+	<update id="updateUseranserquestion" parameterType="Useranserquestion">update useranserquestion set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 试题id -->  
+			<if test=" questionId !=null and questionId !='' ">questionId=#{questionId},</if>  
+			<!-- 试题类型  1选择题（单选） 2判断题 3多选题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId=#{questionTypeId},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if>  
+			<!-- 答题人id -->  
+			<if test=" answerUserId !=null and answerUserId !='' ">answerUserId=#{answerUserId},</if>  
+			<!-- 答题时间 -->  
+			<if test=" answerDate !=null ">answerDate=#{answerDate},</if>  
+			<!-- 是否回答正确  1 正确  2错误 -->  
+			<if test=" answerIsRight !=null and answerIsRight !='' ">answerIsRight=#{answerIsRight},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

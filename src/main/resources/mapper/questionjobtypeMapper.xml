@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.QuestionjobtypeDao">
+	<!-- 动态条件查询questionjobtype -->
+	<select id="getAllQuestionjobtype" parameterType="Questionjobtype" resultType="Questionjobtype">SELECT * FROM questionjobtype
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 问题所属职位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">and questionJobTypeName=#{questionJobTypeName}</if>  
+			<!-- 是否审核  1未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">and isChecked=#{isChecked}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Questionjobtype">SELECT * FROM questionjobtype 
+		<where> 
+			<!-- 问题所属职位名称 -->  
+			<if test="1==1">or questionJobTypeName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存questionjobtype -->
+	<insert parameterType="Questionjobtype" id="addQuestionjobtype">INSERT INTO questionjobtype
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 问题所属职位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName,</if>  
+			<!-- 是否审核  1未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 问题所属职位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">#{questionJobTypeName},</if>  
+			<!-- 是否审核  1未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">#{isChecked},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新questionjobtype -->
+	<update id="updateQuestionjobtype" parameterType="Questionjobtype">update questionjobtype set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 问题所属职位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName=#{questionJobTypeName},</if>  
+			<!-- 是否审核  1未审核  2已审核 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked=#{isChecked},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

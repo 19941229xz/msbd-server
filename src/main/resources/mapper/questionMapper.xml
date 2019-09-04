@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.QuestionDao">
+	<!-- 动态条件查询question -->
+	<select id="getAllQuestion" parameterType="Question" resultType="Question">SELECT * FROM question
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 问题 -->  
+			<if test=" question !=null and question !='' ">and question=#{question}</if>  
+			<!-- 答案 -->  
+			<if test=" answer !=null and answer !='' ">and answer=#{answer}</if>  
+			<!-- 问题分类：1选择题  2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">and questionTypeId=#{questionTypeId}</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">and questionJobTypeId=#{questionJobTypeId}</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">and questionJobTypeName=#{questionJobTypeName}</if>  
+			<!-- 题目解析 -->  
+			<if test=" explaination !=null and explaination !='' ">and explaination=#{explaination}</if>  
+			<!-- 题目解析配图1 -->  
+			<if test=" explainationImg1 !=null and explainationImg1 !='' ">and explainationImg1=#{explainationImg1}</if>  
+			<!-- 题目解析配图2 -->  
+			<if test=" explainationImg2 !=null and explainationImg2 !='' ">and explainationImg2=#{explainationImg2}</if>  
+			<!-- 题目解析配图3 -->  
+			<if test=" explainationImg3 !=null and explainationImg3 !='' ">and explainationImg3=#{explainationImg3}</if>  
+			<!-- 题目解析配图4 -->  
+			<if test=" explainationImg4 !=null and explainationImg4 !='' ">and explainationImg4=#{explainationImg4}</if>  
+			<!-- 选项A -->  
+			<if test=" optionA !=null and optionA !='' ">and optionA=#{optionA}</if>  
+			<!-- 选项B -->  
+			<if test=" optionB !=null and optionB !='' ">and optionB=#{optionB}</if>  
+			<!-- 选项C -->  
+			<if test=" optionC !=null and optionC !='' ">and optionC=#{optionC}</if>  
+			<!-- 选项D -->  
+			<if test=" optionD !=null and optionD !='' ">and optionD=#{optionD}</if>  
+			<!-- 正确选项 -->  
+			<if test=" rightOption !=null and rightOption !='' ">and rightOption=#{rightOption}</if>  
+			<!-- 问题配图1 -->  
+			<if test=" questionImg1 !=null and questionImg1 !='' ">and questionImg1=#{questionImg1}</if>  
+			<!-- 问题配图2 -->  
+			<if test=" questionImg2 !=null and questionImg2 !='' ">and questionImg2=#{questionImg2}</if>  
+			<!-- 问题配图3 -->  
+			<if test=" questionImg3 !=null and questionImg3 !='' ">and questionImg3=#{questionImg3}</if>  
+			<!-- 问题配图4 -->  
+			<if test=" questionImg4 !=null and questionImg4 !='' ">and questionImg4=#{questionImg4}</if>  
+			<!-- 详细解释 -->  
+			<if test=" fullExplaination !=null and fullExplaination !='' ">and fullExplaination=#{fullExplaination}</if>  
+			<!-- 详细解释配图1 -->  
+			<if test=" fullExplainationImg1 !=null and fullExplainationImg1 !='' ">and fullExplainationImg1=#{fullExplainationImg1}</if>  
+			<!-- 详细解释配图2 -->  
+			<if test=" fullExplainationImg2 !=null and fullExplainationImg2 !='' ">and fullExplainationImg2=#{fullExplainationImg2}</if>  
+			<!-- 详细解释配图3 -->  
+			<if test=" fullExplainationImg3 !=null and fullExplainationImg3 !='' ">and fullExplainationImg3=#{fullExplainationImg3}</if>  
+			<!-- 详细解释配图4 -->  
+			<if test=" fullExplainationImg4 !=null and fullExplainationImg4 !='' ">and fullExplainationImg4=#{fullExplainationImg4}</if>  
+			<!-- 所属试卷id -->  
+			<if test=" examPaperId !=null and examPaperId !='' ">and examPaperId=#{examPaperId}</if>  
+			<!-- 所属试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">and examPaperName=#{examPaperName}</if>  
+			<!-- 试题创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">and createUserId=#{createUserId}</if>  
+			<!-- 试题创建人头像 -->  
+			<if test=" createUserHeadPic !=null and createUserHeadPic !='' ">and createUserHeadPic=#{createUserHeadPic}</if>  
+			<!-- 试题创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">and createUserRealName=#{createUserRealName}</if>  
+			<!-- 试题创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">and createUserNickName=#{createUserNickName}</if>  
+			<!-- 试题评论数 -->  
+			<if test=" commentNum !=null and commentNum !='' ">and commentNum=#{commentNum}</if>  
+			<!-- 是否审核通过 1未通过 2已通过 -->  
+			<if test=" isChecked !=null and isChecked !='' ">and isChecked=#{isChecked}</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">and checkUserId=#{checkUserId}</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">and checkUserRealName=#{checkUserRealName}</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">and checkUserNickName=#{checkUserNickName}</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">and checkDate=#{checkDate}</if>  
+			<!-- 试题创建时间 -->  
+			<if test=" createDate !=null ">and createDate=#{createDate}</if>  
+			<!-- 被回答次数 -->  
+			<if test=" answeredNum !=null and answeredNum !='' ">and answeredNum=#{answeredNum}</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">and viewNum=#{viewNum}</if>  
+			<!-- 回答错误的次数 -->  
+			<if test=" answerIsFalseNum !=null and answerIsFalseNum !='' ">and answerIsFalseNum=#{answerIsFalseNum}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Question">SELECT * FROM question 
+		<where> 
+			<!-- 问题 -->  
+			<if test="1==1">or question like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 答案 -->  
+			<if test="1==1">or answer like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 所属岗位名称 -->  
+			<if test="1==1">or questionJobTypeName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 题目解析 -->  
+			<if test="1==1">or explaination like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 题目解析配图1 -->  
+			<if test="1==1">or explainationImg1 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 题目解析配图2 -->  
+			<if test="1==1">or explainationImg2 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 题目解析配图3 -->  
+			<if test="1==1">or explainationImg3 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 题目解析配图4 -->  
+			<if test="1==1">or explainationImg4 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 选项A -->  
+			<if test="1==1">or optionA like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 选项B -->  
+			<if test="1==1">or optionB like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 选项C -->  
+			<if test="1==1">or optionC like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 选项D -->  
+			<if test="1==1">or optionD like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 正确选项 -->  
+			<if test="1==1">or rightOption like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 问题配图1 -->  
+			<if test="1==1">or questionImg1 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 问题配图2 -->  
+			<if test="1==1">or questionImg2 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 问题配图3 -->  
+			<if test="1==1">or questionImg3 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 问题配图4 -->  
+			<if test="1==1">or questionImg4 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 详细解释 -->  
+			<if test="1==1">or fullExplaination like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 详细解释配图1 -->  
+			<if test="1==1">or fullExplainationImg1 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 详细解释配图2 -->  
+			<if test="1==1">or fullExplainationImg2 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 详细解释配图3 -->  
+			<if test="1==1">or fullExplainationImg3 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 详细解释配图4 -->  
+			<if test="1==1">or fullExplainationImg4 like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 所属试卷名称 -->  
+			<if test="1==1">or examPaperName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 试题创建人头像 -->  
+			<if test="1==1">or createUserHeadPic like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 试题创建人真实姓名 -->  
+			<if test="1==1">or createUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 试题创建人昵称 -->  
+			<if test="1==1">or createUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test="1==1">or checkUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 审核人昵称 -->  
+			<if test="1==1">or checkUserNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存question -->
+	<insert parameterType="Question" id="addQuestion">INSERT INTO question
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 问题 -->  
+			<if test=" question !=null and question !='' ">question,</if>  
+			<!-- 答案 -->  
+			<if test=" answer !=null and answer !='' ">answer,</if>  
+			<!-- 问题分类：1选择题  2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId,</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId,</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName,</if>  
+			<!-- 题目解析 -->  
+			<if test=" explaination !=null and explaination !='' ">explaination,</if>  
+			<!-- 题目解析配图1 -->  
+			<if test=" explainationImg1 !=null and explainationImg1 !='' ">explainationImg1,</if>  
+			<!-- 题目解析配图2 -->  
+			<if test=" explainationImg2 !=null and explainationImg2 !='' ">explainationImg2,</if>  
+			<!-- 题目解析配图3 -->  
+			<if test=" explainationImg3 !=null and explainationImg3 !='' ">explainationImg3,</if>  
+			<!-- 题目解析配图4 -->  
+			<if test=" explainationImg4 !=null and explainationImg4 !='' ">explainationImg4,</if>  
+			<!-- 选项A -->  
+			<if test=" optionA !=null and optionA !='' ">optionA,</if>  
+			<!-- 选项B -->  
+			<if test=" optionB !=null and optionB !='' ">optionB,</if>  
+			<!-- 选项C -->  
+			<if test=" optionC !=null and optionC !='' ">optionC,</if>  
+			<!-- 选项D -->  
+			<if test=" optionD !=null and optionD !='' ">optionD,</if>  
+			<!-- 正确选项 -->  
+			<if test=" rightOption !=null and rightOption !='' ">rightOption,</if>  
+			<!-- 问题配图1 -->  
+			<if test=" questionImg1 !=null and questionImg1 !='' ">questionImg1,</if>  
+			<!-- 问题配图2 -->  
+			<if test=" questionImg2 !=null and questionImg2 !='' ">questionImg2,</if>  
+			<!-- 问题配图3 -->  
+			<if test=" questionImg3 !=null and questionImg3 !='' ">questionImg3,</if>  
+			<!-- 问题配图4 -->  
+			<if test=" questionImg4 !=null and questionImg4 !='' ">questionImg4,</if>  
+			<!-- 详细解释 -->  
+			<if test=" fullExplaination !=null and fullExplaination !='' ">fullExplaination,</if>  
+			<!-- 详细解释配图1 -->  
+			<if test=" fullExplainationImg1 !=null and fullExplainationImg1 !='' ">fullExplainationImg1,</if>  
+			<!-- 详细解释配图2 -->  
+			<if test=" fullExplainationImg2 !=null and fullExplainationImg2 !='' ">fullExplainationImg2,</if>  
+			<!-- 详细解释配图3 -->  
+			<if test=" fullExplainationImg3 !=null and fullExplainationImg3 !='' ">fullExplainationImg3,</if>  
+			<!-- 详细解释配图4 -->  
+			<if test=" fullExplainationImg4 !=null and fullExplainationImg4 !='' ">fullExplainationImg4,</if>  
+			<!-- 所属试卷id -->  
+			<if test=" examPaperId !=null and examPaperId !='' ">examPaperId,</if>  
+			<!-- 所属试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">examPaperName,</if>  
+			<!-- 试题创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">createUserId,</if>  
+			<!-- 试题创建人头像 -->  
+			<if test=" createUserHeadPic !=null and createUserHeadPic !='' ">createUserHeadPic,</if>  
+			<!-- 试题创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">createUserRealName,</if>  
+			<!-- 试题创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">createUserNickName,</if>  
+			<!-- 试题评论数 -->  
+			<if test=" commentNum !=null and commentNum !='' ">commentNum,</if>  
+			<!-- 是否审核通过 1未通过 2已通过 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked,</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">checkUserId,</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">checkUserRealName,</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">checkUserNickName,</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">checkDate,</if>  
+			<!-- 试题创建时间 -->  
+			<if test=" createDate !=null ">createDate,</if>  
+			<!-- 被回答次数 -->  
+			<if test=" answeredNum !=null and answeredNum !='' ">answeredNum,</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">viewNum,</if>  
+			<!-- 回答错误的次数 -->  
+			<if test=" answerIsFalseNum !=null and answerIsFalseNum !='' ">answerIsFalseNum,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 问题 -->  
+			<if test=" question !=null and question !='' ">#{question},</if>  
+			<!-- 答案 -->  
+			<if test=" answer !=null and answer !='' ">#{answer},</if>  
+			<!-- 问题分类：1选择题  2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">#{questionTypeId},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">#{questionJobTypeId},</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">#{questionJobTypeName},</if>  
+			<!-- 题目解析 -->  
+			<if test=" explaination !=null and explaination !='' ">#{explaination},</if>  
+			<!-- 题目解析配图1 -->  
+			<if test=" explainationImg1 !=null and explainationImg1 !='' ">#{explainationImg1},</if>  
+			<!-- 题目解析配图2 -->  
+			<if test=" explainationImg2 !=null and explainationImg2 !='' ">#{explainationImg2},</if>  
+			<!-- 题目解析配图3 -->  
+			<if test=" explainationImg3 !=null and explainationImg3 !='' ">#{explainationImg3},</if>  
+			<!-- 题目解析配图4 -->  
+			<if test=" explainationImg4 !=null and explainationImg4 !='' ">#{explainationImg4},</if>  
+			<!-- 选项A -->  
+			<if test=" optionA !=null and optionA !='' ">#{optionA},</if>  
+			<!-- 选项B -->  
+			<if test=" optionB !=null and optionB !='' ">#{optionB},</if>  
+			<!-- 选项C -->  
+			<if test=" optionC !=null and optionC !='' ">#{optionC},</if>  
+			<!-- 选项D -->  
+			<if test=" optionD !=null and optionD !='' ">#{optionD},</if>  
+			<!-- 正确选项 -->  
+			<if test=" rightOption !=null and rightOption !='' ">#{rightOption},</if>  
+			<!-- 问题配图1 -->  
+			<if test=" questionImg1 !=null and questionImg1 !='' ">#{questionImg1},</if>  
+			<!-- 问题配图2 -->  
+			<if test=" questionImg2 !=null and questionImg2 !='' ">#{questionImg2},</if>  
+			<!-- 问题配图3 -->  
+			<if test=" questionImg3 !=null and questionImg3 !='' ">#{questionImg3},</if>  
+			<!-- 问题配图4 -->  
+			<if test=" questionImg4 !=null and questionImg4 !='' ">#{questionImg4},</if>  
+			<!-- 详细解释 -->  
+			<if test=" fullExplaination !=null and fullExplaination !='' ">#{fullExplaination},</if>  
+			<!-- 详细解释配图1 -->  
+			<if test=" fullExplainationImg1 !=null and fullExplainationImg1 !='' ">#{fullExplainationImg1},</if>  
+			<!-- 详细解释配图2 -->  
+			<if test=" fullExplainationImg2 !=null and fullExplainationImg2 !='' ">#{fullExplainationImg2},</if>  
+			<!-- 详细解释配图3 -->  
+			<if test=" fullExplainationImg3 !=null and fullExplainationImg3 !='' ">#{fullExplainationImg3},</if>  
+			<!-- 详细解释配图4 -->  
+			<if test=" fullExplainationImg4 !=null and fullExplainationImg4 !='' ">#{fullExplainationImg4},</if>  
+			<!-- 所属试卷id -->  
+			<if test=" examPaperId !=null and examPaperId !='' ">#{examPaperId},</if>  
+			<!-- 所属试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">#{examPaperName},</if>  
+			<!-- 试题创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">#{createUserId},</if>  
+			<!-- 试题创建人头像 -->  
+			<if test=" createUserHeadPic !=null and createUserHeadPic !='' ">#{createUserHeadPic},</if>  
+			<!-- 试题创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">#{createUserRealName},</if>  
+			<!-- 试题创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">#{createUserNickName},</if>  
+			<!-- 试题评论数 -->  
+			<if test=" commentNum !=null and commentNum !='' ">#{commentNum},</if>  
+			<!-- 是否审核通过 1未通过 2已通过 -->  
+			<if test=" isChecked !=null and isChecked !='' ">#{isChecked},</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">#{checkUserId},</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">#{checkUserRealName},</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">#{checkUserNickName},</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">#{checkDate},</if>  
+			<!-- 试题创建时间 -->  
+			<if test=" createDate !=null ">#{createDate},</if>  
+			<!-- 被回答次数 -->  
+			<if test=" answeredNum !=null and answeredNum !='' ">#{answeredNum},</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">#{viewNum},</if>  
+			<!-- 回答错误的次数 -->  
+			<if test=" answerIsFalseNum !=null and answerIsFalseNum !='' ">#{answerIsFalseNum},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新question -->
+	<update id="updateQuestion" parameterType="Question">update question set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 问题 -->  
+			<if test=" question !=null and question !='' ">question=#{question},</if>  
+			<!-- 答案 -->  
+			<if test=" answer !=null and answer !='' ">answer=#{answer},</if>  
+			<!-- 问题分类：1选择题  2判断题 -->  
+			<if test=" questionTypeId !=null and questionTypeId !='' ">questionTypeId=#{questionTypeId},</if>  
+			<!-- 问题所属得岗位类型id -->  
+			<if test=" questionJobTypeId !=null and questionJobTypeId !='' ">questionJobTypeId=#{questionJobTypeId},</if>  
+			<!-- 所属岗位名称 -->  
+			<if test=" questionJobTypeName !=null and questionJobTypeName !='' ">questionJobTypeName=#{questionJobTypeName},</if>  
+			<!-- 题目解析 -->  
+			<if test=" explaination !=null and explaination !='' ">explaination=#{explaination},</if>  
+			<!-- 题目解析配图1 -->  
+			<if test=" explainationImg1 !=null and explainationImg1 !='' ">explainationImg1=#{explainationImg1},</if>  
+			<!-- 题目解析配图2 -->  
+			<if test=" explainationImg2 !=null and explainationImg2 !='' ">explainationImg2=#{explainationImg2},</if>  
+			<!-- 题目解析配图3 -->  
+			<if test=" explainationImg3 !=null and explainationImg3 !='' ">explainationImg3=#{explainationImg3},</if>  
+			<!-- 题目解析配图4 -->  
+			<if test=" explainationImg4 !=null and explainationImg4 !='' ">explainationImg4=#{explainationImg4},</if>  
+			<!-- 选项A -->  
+			<if test=" optionA !=null and optionA !='' ">optionA=#{optionA},</if>  
+			<!-- 选项B -->  
+			<if test=" optionB !=null and optionB !='' ">optionB=#{optionB},</if>  
+			<!-- 选项C -->  
+			<if test=" optionC !=null and optionC !='' ">optionC=#{optionC},</if>  
+			<!-- 选项D -->  
+			<if test=" optionD !=null and optionD !='' ">optionD=#{optionD},</if>  
+			<!-- 正确选项 -->  
+			<if test=" rightOption !=null and rightOption !='' ">rightOption=#{rightOption},</if>  
+			<!-- 问题配图1 -->  
+			<if test=" questionImg1 !=null and questionImg1 !='' ">questionImg1=#{questionImg1},</if>  
+			<!-- 问题配图2 -->  
+			<if test=" questionImg2 !=null and questionImg2 !='' ">questionImg2=#{questionImg2},</if>  
+			<!-- 问题配图3 -->  
+			<if test=" questionImg3 !=null and questionImg3 !='' ">questionImg3=#{questionImg3},</if>  
+			<!-- 问题配图4 -->  
+			<if test=" questionImg4 !=null and questionImg4 !='' ">questionImg4=#{questionImg4},</if>  
+			<!-- 详细解释 -->  
+			<if test=" fullExplaination !=null and fullExplaination !='' ">fullExplaination=#{fullExplaination},</if>  
+			<!-- 详细解释配图1 -->  
+			<if test=" fullExplainationImg1 !=null and fullExplainationImg1 !='' ">fullExplainationImg1=#{fullExplainationImg1},</if>  
+			<!-- 详细解释配图2 -->  
+			<if test=" fullExplainationImg2 !=null and fullExplainationImg2 !='' ">fullExplainationImg2=#{fullExplainationImg2},</if>  
+			<!-- 详细解释配图3 -->  
+			<if test=" fullExplainationImg3 !=null and fullExplainationImg3 !='' ">fullExplainationImg3=#{fullExplainationImg3},</if>  
+			<!-- 详细解释配图4 -->  
+			<if test=" fullExplainationImg4 !=null and fullExplainationImg4 !='' ">fullExplainationImg4=#{fullExplainationImg4},</if>  
+			<!-- 所属试卷id -->  
+			<if test=" examPaperId !=null and examPaperId !='' ">examPaperId=#{examPaperId},</if>  
+			<!-- 所属试卷名称 -->  
+			<if test=" examPaperName !=null and examPaperName !='' ">examPaperName=#{examPaperName},</if>  
+			<!-- 试题创建人id -->  
+			<if test=" createUserId !=null and createUserId !='' ">createUserId=#{createUserId},</if>  
+			<!-- 试题创建人头像 -->  
+			<if test=" createUserHeadPic !=null and createUserHeadPic !='' ">createUserHeadPic=#{createUserHeadPic},</if>  
+			<!-- 试题创建人真实姓名 -->  
+			<if test=" createUserRealName !=null and createUserRealName !='' ">createUserRealName=#{createUserRealName},</if>  
+			<!-- 试题创建人昵称 -->  
+			<if test=" createUserNickName !=null and createUserNickName !='' ">createUserNickName=#{createUserNickName},</if>  
+			<!-- 试题评论数 -->  
+			<if test=" commentNum !=null and commentNum !='' ">commentNum=#{commentNum},</if>  
+			<!-- 是否审核通过 1未通过 2已通过 -->  
+			<if test=" isChecked !=null and isChecked !='' ">isChecked=#{isChecked},</if>  
+			<!-- 审核人id -->  
+			<if test=" checkUserId !=null and checkUserId !='' ">checkUserId=#{checkUserId},</if>  
+			<!-- 审核人真实姓名 -->  
+			<if test=" checkUserRealName !=null and checkUserRealName !='' ">checkUserRealName=#{checkUserRealName},</if>  
+			<!-- 审核人昵称 -->  
+			<if test=" checkUserNickName !=null and checkUserNickName !='' ">checkUserNickName=#{checkUserNickName},</if>  
+			<!-- 审核时间 -->  
+			<if test=" checkDate !=null ">checkDate=#{checkDate},</if>  
+			<!-- 试题创建时间 -->  
+			<if test=" createDate !=null ">createDate=#{createDate},</if>  
+			<!-- 被回答次数 -->  
+			<if test=" answeredNum !=null and answeredNum !='' ">answeredNum=#{answeredNum},</if>  
+			<!-- 浏览次数 -->  
+			<if test=" viewNum !=null and viewNum !='' ">viewNum=#{viewNum},</if>  
+			<!-- 回答错误的次数 -->  
+			<if test=" answerIsFalseNum !=null and answerIsFalseNum !='' ">answerIsFalseNum=#{answerIsFalseNum},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

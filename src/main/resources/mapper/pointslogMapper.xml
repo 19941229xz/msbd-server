@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.msbd.dao.PointslogDao">
+	<!-- 动态条件查询pointslog -->
+	<select id="getAllPointslog" parameterType="Pointslog" resultType="Pointslog">SELECT * FROM pointslog
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 积分变化类型 1消费 2充值 3奖励 4提现 -->  
+			<if test=" changeType !=null and changeType !='' ">and changeType=#{changeType}</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">and createDate=#{createDate}</if>  
+			<!-- 积分所属用户id -->  
+			<if test=" belongUserId !=null and belongUserId !='' ">and belongUserId=#{belongUserId}</if>  
+			<!-- 积分所属用户账号 -->  
+			<if test=" belongUserName !=null and belongUserName !='' ">and belongUserName=#{belongUserName}</if>  
+			<!-- 积分所属用户昵称 -->  
+			<if test=" belongUserNIckName !=null and belongUserNIckName !='' ">and belongUserNIckName=#{belongUserNIckName}</if>  
+			<!-- 积分所属用户真实姓名 -->  
+			<if test=" belongUserRealName !=null and belongUserRealName !='' ">and belongUserRealName=#{belongUserRealName}</if>  
+			<!-- 积分所属用户头像 -->  
+			<if test=" belongUserHeadPic !=null and belongUserHeadPic !='' ">and belongUserHeadPic=#{belongUserHeadPic}</if>  
+			<!-- 消费类型 1购买课程 2开通详细解释 -->  
+			<if test=" consumeType !=null and consumeType !='' ">and consumeType=#{consumeType}</if>  
+			<!-- 消费类型解释 -->  
+			<if test=" consumeTypeStr !=null and consumeTypeStr !='' ">and consumeTypeStr=#{consumeTypeStr}</if>  
+			<!-- 积分变化量 -->  
+			<if test=" changePoints !=null and changePoints !='' ">and changePoints=#{changePoints}</if>  
+			<!-- 购买的课程id -->  
+			<if test=" buyCourseId !=null and buyCourseId !='' ">and buyCourseId=#{buyCourseId}</if>  
+			<!-- 购买的课程的名称 -->  
+			<if test=" buyCourseName !=null and buyCourseName !='' ">and buyCourseName=#{buyCourseName}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Pointslog">SELECT * FROM pointslog 
+		<where> 
+			<!-- 积分所属用户账号 -->  
+			<if test="1==1">or belongUserName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 积分所属用户昵称 -->  
+			<if test="1==1">or belongUserNIckName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 积分所属用户真实姓名 -->  
+			<if test="1==1">or belongUserRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 积分所属用户头像 -->  
+			<if test="1==1">or belongUserHeadPic like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 消费类型解释 -->  
+			<if test="1==1">or consumeTypeStr like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 购买的课程的名称 -->  
+			<if test="1==1">or buyCourseName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存pointslog -->
+	<insert parameterType="Pointslog" id="addPointslog">INSERT INTO pointslog
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 积分变化类型 1消费 2充值 3奖励 4提现 -->  
+			<if test=" changeType !=null and changeType !='' ">changeType,</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">createDate,</if>  
+			<!-- 积分所属用户id -->  
+			<if test=" belongUserId !=null and belongUserId !='' ">belongUserId,</if>  
+			<!-- 积分所属用户账号 -->  
+			<if test=" belongUserName !=null and belongUserName !='' ">belongUserName,</if>  
+			<!-- 积分所属用户昵称 -->  
+			<if test=" belongUserNIckName !=null and belongUserNIckName !='' ">belongUserNIckName,</if>  
+			<!-- 积分所属用户真实姓名 -->  
+			<if test=" belongUserRealName !=null and belongUserRealName !='' ">belongUserRealName,</if>  
+			<!-- 积分所属用户头像 -->  
+			<if test=" belongUserHeadPic !=null and belongUserHeadPic !='' ">belongUserHeadPic,</if>  
+			<!-- 消费类型 1购买课程 2开通详细解释 -->  
+			<if test=" consumeType !=null and consumeType !='' ">consumeType,</if>  
+			<!-- 消费类型解释 -->  
+			<if test=" consumeTypeStr !=null and consumeTypeStr !='' ">consumeTypeStr,</if>  
+			<!-- 积分变化量 -->  
+			<if test=" changePoints !=null and changePoints !='' ">changePoints,</if>  
+			<!-- 购买的课程id -->  
+			<if test=" buyCourseId !=null and buyCourseId !='' ">buyCourseId,</if>  
+			<!-- 购买的课程的名称 -->  
+			<if test=" buyCourseName !=null and buyCourseName !='' ">buyCourseName,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 积分变化类型 1消费 2充值 3奖励 4提现 -->  
+			<if test=" changeType !=null and changeType !='' ">#{changeType},</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">#{createDate},</if>  
+			<!-- 积分所属用户id -->  
+			<if test=" belongUserId !=null and belongUserId !='' ">#{belongUserId},</if>  
+			<!-- 积分所属用户账号 -->  
+			<if test=" belongUserName !=null and belongUserName !='' ">#{belongUserName},</if>  
+			<!-- 积分所属用户昵称 -->  
+			<if test=" belongUserNIckName !=null and belongUserNIckName !='' ">#{belongUserNIckName},</if>  
+			<!-- 积分所属用户真实姓名 -->  
+			<if test=" belongUserRealName !=null and belongUserRealName !='' ">#{belongUserRealName},</if>  
+			<!-- 积分所属用户头像 -->  
+			<if test=" belongUserHeadPic !=null and belongUserHeadPic !='' ">#{belongUserHeadPic},</if>  
+			<!-- 消费类型 1购买课程 2开通详细解释 -->  
+			<if test=" consumeType !=null and consumeType !='' ">#{consumeType},</if>  
+			<!-- 消费类型解释 -->  
+			<if test=" consumeTypeStr !=null and consumeTypeStr !='' ">#{consumeTypeStr},</if>  
+			<!-- 积分变化量 -->  
+			<if test=" changePoints !=null and changePoints !='' ">#{changePoints},</if>  
+			<!-- 购买的课程id -->  
+			<if test=" buyCourseId !=null and buyCourseId !='' ">#{buyCourseId},</if>  
+			<!-- 购买的课程的名称 -->  
+			<if test=" buyCourseName !=null and buyCourseName !='' ">#{buyCourseName},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新pointslog -->
+	<update id="updatePointslog" parameterType="Pointslog">update pointslog set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 积分变化类型 1消费 2充值 3奖励 4提现 -->  
+			<if test=" changeType !=null and changeType !='' ">changeType=#{changeType},</if>  
+			<!-- 创建时间 -->  
+			<if test=" createDate !=null ">createDate=#{createDate},</if>  
+			<!-- 积分所属用户id -->  
+			<if test=" belongUserId !=null and belongUserId !='' ">belongUserId=#{belongUserId},</if>  
+			<!-- 积分所属用户账号 -->  
+			<if test=" belongUserName !=null and belongUserName !='' ">belongUserName=#{belongUserName},</if>  
+			<!-- 积分所属用户昵称 -->  
+			<if test=" belongUserNIckName !=null and belongUserNIckName !='' ">belongUserNIckName=#{belongUserNIckName},</if>  
+			<!-- 积分所属用户真实姓名 -->  
+			<if test=" belongUserRealName !=null and belongUserRealName !='' ">belongUserRealName=#{belongUserRealName},</if>  
+			<!-- 积分所属用户头像 -->  
+			<if test=" belongUserHeadPic !=null and belongUserHeadPic !='' ">belongUserHeadPic=#{belongUserHeadPic},</if>  
+			<!-- 消费类型 1购买课程 2开通详细解释 -->  
+			<if test=" consumeType !=null and consumeType !='' ">consumeType=#{consumeType},</if>  
+			<!-- 消费类型解释 -->  
+			<if test=" consumeTypeStr !=null and consumeTypeStr !='' ">consumeTypeStr=#{consumeTypeStr},</if>  
+			<!-- 积分变化量 -->  
+			<if test=" changePoints !=null and changePoints !='' ">changePoints=#{changePoints},</if>  
+			<!-- 购买的课程id -->  
+			<if test=" buyCourseId !=null and buyCourseId !='' ">buyCourseId=#{buyCourseId},</if>  
+			<!-- 购买的课程的名称 -->  
+			<if test=" buyCourseName !=null and buyCourseName !='' ">buyCourseName=#{buyCourseName},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>
